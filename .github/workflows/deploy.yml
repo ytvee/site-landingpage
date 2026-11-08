@@ -38,7 +38,12 @@ jobs:
       - run: pnpm build
       - run: pnpm run validate
       - run: pnpm exec playwright install --with-deps chromium
-      - run: SITE_BASE=/ pnpm build && pnpm test
+      - run: pnpm build
+        env:
+          SITE_BASE: /
+      - run: pnpm test
+        env:
+          SITE_BASE: /
 
   build:
     needs: check

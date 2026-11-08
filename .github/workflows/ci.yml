@@ -27,4 +27,9 @@ jobs:
       - run: pnpm run validate
       - run: pnpm exec playwright install --with-deps chromium
       # Тесты идут против сборки без префикса base (preview отдаёт её с корня).
-      - run: SITE_BASE=/ pnpm build && pnpm test
+      - run: pnpm build
+        env:
+          SITE_BASE: /
+      - run: pnpm test
+        env:
+          SITE_BASE: /

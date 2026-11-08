@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  title: string;
+  label?: string;
+  text?: string;
+  href?: string;
+  image?: ImageMetadata;
+  alt?: string;
+}
+const { title, label, text, href, image, alt = '' } = Astro.props;
+---
+<article class="card">
+  {image && <Image class="card__img" src={image} alt={alt} widths={[400, 800]} sizes="(min-width: 900px) 33vw, 100vw" format="webp" loading="lazy" />}
+  {label && <p class="label">{label}</p>}
+  <h3 class="card__title">{href ? <a href={href}>{title}</a> : title}</h3>
+  {text && <p class="card__text">{text}</p>}
+</article>
+<style>
+  .card { position: relative; display: flex; flex-direction: column; gap: var(--space-3); }
+  .card__img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+  .card__title { font-size: 1.5rem; line-height: 1.25; letter-spacing: -0.02em; }
+  .card__title a { text-decoration: none; }
+  .card__title a::after { content: ''; position: absolute; inset: 0; }
+  .card__text { font-size: var(--fs-body-sm); color: var(--color-text-muted); max-width: 36ch; }
+</style>

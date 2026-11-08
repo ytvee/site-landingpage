@@ -1,0 +1,25 @@
+---
+import { booking } from '../data/content';
+import Button from './Button.astro';
+---
+<section id={booking.id} class="booking" aria-labelledby="booking-title">
+  <div class="container booking__in">
+    <h2 id="booking-title">{booking.title}</h2>
+    <p class="booking__text">{booking.text}</p>
+    <p class="booking__actions">
+      <Button href={`tel:${booking.phone}`} variant="on-dark">Позвонить</Button>
+      <Button href="https://t.me/+79992223333" variant="on-dark" external>Telegram</Button>
+      <Button href="https://wa.me/79992223333" variant="on-dark" external>WhatsApp</Button>
+    </p>
+    <p class="booking__phone"><a href={`tel:${booking.phone}`}>{booking.phoneDisplay}</a></p>
+  </div>
+</section>
+<style>
+  .booking { background: var(--color-topbar); color: var(--color-on-dark); padding-block: var(--section-gap); }
+  .booking__in { display: flex; flex-direction: column; gap: var(--space-6); }
+  .booking__text { max-width: 36ch; opacity: 0.8; }
+  .booking__actions { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+  .booking__phone { font-family: var(--font-serif); font-size: 1.5rem; }
+  .booking__phone a { text-decoration: none; }
+  @media (max-width: 560px) { .booking__actions { flex-direction: column; } }
+</style>

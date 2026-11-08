@@ -1,0 +1,24 @@
+---
+import { Image } from 'astro:assets';
+import Section from './Section.astro';
+import { gallery } from '../data/content';
+---
+<Section id="gallery" label="Галерея" title="Пространство">
+  <ul class="gallery">
+    {gallery.map((g) => (
+      <li class="gallery__item">
+        <Image class="gallery__img" src={g.image} alt={g.alt} widths={[500, 800, 1200]} sizes="(min-width: 900px) 58vw, 100vw" format="webp" loading="lazy" />
+      </li>
+    ))}
+  </ul>
+</Section>
+<style>
+  .gallery { display: grid; gap: var(--space-6); list-style: none; margin: 0; padding: 0; }
+  .gallery__img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  @media (min-width: 900px) {
+    .gallery { grid-template-columns: repeat(12, 1fr); grid-auto-rows: clamp(18rem, 28vw, 28rem); }
+    .gallery__img { height: 100%; aspect-ratio: auto; }
+    .gallery__item:nth-child(4n + 1), .gallery__item:nth-child(4n) { grid-column: span 7; }
+    .gallery__item:nth-child(4n + 2), .gallery__item:nth-child(4n + 3) { grid-column: span 5; }
+  }
+</style>

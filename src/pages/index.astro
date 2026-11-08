@@ -1,6 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
+import SplitSection from '../components/SplitSection.astro';
+import Gallery from '../components/Gallery.astro';
+import Booking from '../components/Booking.astro';
+import { workBlock, meetingsBlock } from '../data/content';
 ---
 
 <BaseLayout
@@ -8,4 +12,8 @@ import Hero from '../components/Hero.astro';
   description="CoffeeFy: кофейня в Санкт-Петербурге на набережной реки Фонтанки, 126. Ежедневно с 9 до 22."
 >
   <Hero />
+  <SplitSection {...workBlock} />
+  <SplitSection {...meetingsBlock} reverse tone="alt" />
+  <Gallery />
+  <Booking />
 </BaseLayout>

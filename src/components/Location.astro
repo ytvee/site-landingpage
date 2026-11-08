@@ -1,0 +1,31 @@
+---
+import { site, routes } from '../data/site';
+import Button from './Button.astro';
+---
+<section id="location" class="loc" aria-labelledby="location-title">
+  <div class="container loc__grid">
+    <div class="loc__text">
+      <p class="label">Адрес</p>
+      <h2 id="location-title">Как нас найти</h2>
+      <ul class="loc__rows">
+        <li><span class="label">Адрес</span><span>{site.addressFull}</span></li>
+        <li><span class="label">Часы</span><span>{site.hoursFull}</span></li>
+        <li><span class="label">Телефон</span><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></li>
+      </ul>
+    </div>
+    <div class="loc__actions">
+      {routes.map((r, i) => <Button href={r.href} variant={i === 0 ? 'solid' : 'outline'} external>{r.label}</Button>)}
+    </div>
+  </div>
+</section>
+<style>
+  .loc { background: var(--color-bg-alt); padding-block: var(--section-gap); }
+  .loc__grid { display: grid; gap: var(--space-12); align-items: end; }
+  .loc__text { display: flex; flex-direction: column; gap: var(--space-4); }
+  .loc__rows { list-style: none; margin: var(--space-6) 0 0; padding: 0; max-width: 36rem; }
+  .loc__rows li { display: grid; grid-template-columns: 6rem 1fr; gap: var(--space-4); padding-block: var(--space-4); border-top: 1px solid rgb(0 0 0 / 0.2); font-size: var(--fs-body); }
+  .loc__rows li:last-child { border-bottom: 1px solid rgb(0 0 0 / 0.2); }
+  .loc__rows a { text-decoration: none; }
+  .loc__actions { display: flex; flex-direction: column; gap: var(--space-4); align-items: flex-start; }
+  @media (min-width: 900px) { .loc__grid { grid-template-columns: 7fr 5fr; } }
+</style>

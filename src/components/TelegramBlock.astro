@@ -1,0 +1,21 @@
+---
+import { site } from '../data/site';
+import { telegramBlock } from '../data/content';
+import Button from './Button.astro';
+---
+{site.telegramChannel && (
+  <section id={telegramBlock.id} class="tg" aria-labelledby="telegram-title">
+    <div class="container tg__in">
+      <div>
+        <h2 id="telegram-title">{telegramBlock.title}</h2>
+        <p class="tg__text">{telegramBlock.text}</p>
+      </div>
+      <Button href={site.telegramChannel} variant="solid" external>Подписаться</Button>
+    </div>
+  </section>
+)}
+<style>
+  .tg { padding-block: var(--section-gap); }
+  .tg__in { display: flex; flex-wrap: wrap; gap: var(--space-8); align-items: end; justify-content: space-between; }
+  .tg__text { margin-top: var(--space-4); color: var(--color-text-muted); }
+</style>

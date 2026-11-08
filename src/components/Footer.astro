@@ -1,0 +1,38 @@
+---
+import { site } from '../data/site';
+import SocialLinks from './SocialLinks.astro';
+---
+<footer class="footer">
+  <div class="container footer__grid">
+    <div>
+      <p class="footer__brand">{site.name}</p>
+      <p class="footer__muted">Кофейня на Фонтанке</p>
+    </div>
+    <div>
+      <p class="label">Адрес и часы</p>
+      <p>{site.addressFull}</p>
+      <p>{site.hoursFull}</p>
+    </div>
+    <div>
+      <p class="label">Контакты</p>
+      <p><a href={`tel:${site.phone}`}>{site.phoneDisplay}</a></p>
+      <p><a href={site.telegramChat} target="_blank" rel="noopener noreferrer">Telegram</a></p>
+      <p><a href={site.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+      <p><a href={site.vk} target="_blank" rel="noopener noreferrer">ВКонтакте</a></p>
+    </div>
+    <div class="footer__social"><SocialLinks /></div>
+  </div>
+  <div class="container footer__legal"><p>© 2026 {site.name}</p></div>
+</footer>
+<style>
+  .footer { background: var(--color-topbar); color: var(--color-on-dark); padding-block: var(--space-16) var(--space-8); font-size: var(--fs-body-sm); }
+  .footer__grid { display: grid; gap: var(--space-8); }
+  .footer p { margin: 0 0 var(--space-2); }
+  .footer .label { opacity: 0.6; margin-bottom: var(--space-3); }
+  .footer a { text-decoration: none; }
+  .footer a:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .footer__brand { font-family: var(--font-serif); font-size: 1.5rem; }
+  .footer__muted { opacity: 0.6; }
+  .footer__legal { margin-top: var(--space-12); padding-top: var(--space-6); border-top: 1px solid rgb(255 255 255 / 0.2); opacity: 0.6; }
+  @media (min-width: 900px) { .footer__grid { grid-template-columns: 1.4fr 1.4fr 1fr auto; } }
+</style>

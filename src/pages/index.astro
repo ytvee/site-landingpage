@@ -4,6 +4,9 @@ import Hero from '../components/Hero.astro';
 import SplitSection from '../components/SplitSection.astro';
 import Gallery from '../components/Gallery.astro';
 import Booking from '../components/Booking.astro';
+import Location from '../components/Location.astro';
+import TelegramBlock from '../components/TelegramBlock.astro';
+import Faq from '../components/Faq.astro';
 import { workBlock, meetingsBlock } from '../data/content';
 ---
 
@@ -16,4 +19,7 @@ import { workBlock, meetingsBlock } from '../data/content';
   <SplitSection {...meetingsBlock} reverse tone="alt" />
   <Gallery />
   <Booking />
+  <Location />
+  <TelegramBlock />
+  <Faq />
 </BaseLayout>

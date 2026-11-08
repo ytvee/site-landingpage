@@ -1,0 +1,55 @@
+/*
+  Дизайн-токены CoffeeFy.
+  Основа: ceremonycoffee.com (цвета, типографика, формы) по docs в проекте «coffeefy/02-design-direction.md».
+  ВРЕМЕННЫЕ значения помечены (provisional): уточняем по логотипу и после просмотра на реальных фото.
+*/
+:root {
+  /* Цвета */
+  --color-bg: #fcfbf9; /* измерено на ceremonycoffee.com */
+  --color-bg-alt: #f5f1eb; /* provisional: бежевая подложка секций, оценка по скриншоту */
+  --color-surface-header: #f3f1ee; /* provisional */
+  --color-text: #000000;
+  --color-text-muted: rgb(0 0 0 / 0.64);
+  --color-line: #000000;
+  --color-on-dark: #ffffff;
+  --color-topbar: #000000;
+  --color-accent: #000000; /* provisional: акцент определим по логотипу */
+
+  /* Шрифты (подключение файлов: этап B, задача S-005) */
+  --font-serif: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Nunito Sans', Avenir, 'Avenir Next', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Типографика (значения Ceremony: h2 44/55, текст 13–16, подписи 11 uppercase) */
+  --fs-label: 0.6875rem; /* 11px */
+  --fs-body-sm: 0.8125rem; /* 13px */
+  --fs-body: 1rem; /* 16px */
+  --fs-h2: clamp(2rem, 1.4rem + 2.4vw, 2.75rem); /* до 44px */
+  --lh-h2: 1.25; /* 55/44 */
+  --ls-h2: -0.025em; /* -1.1px на 44px */
+  --ls-label: 0.1em; /* 1.1px на 11px */
+  --lh-body: 1.5;
+
+  /* Отступы: шкала для «воздуха» между блоками */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --section-gap: clamp(4rem, 3rem + 5vw, 8rem);
+  --container: 1200px;
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+
+  /* Формы: прямоугольные, контур 1px (как у Ceremony) */
+  --radius: 0;
+  --border: 1px solid var(--color-line);
+  --btn-pad-y: 0.875rem;
+  --btn-pad-x: 1rem;
+
+  /* Движение */
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --dur: 200ms;
+}

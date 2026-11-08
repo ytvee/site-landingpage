@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Временная страница-образец токенов (этап A). Заменится реальным лендингом на этапе B.
+const swatches = [
+  { name: '--color-bg', value: '#fcfbf9' },
+  { name: '--color-bg-alt', value: '#f5f1eb' },
+  { name: '--color-surface-header', value: '#f3f1ee' },
+  { name: '--color-text', value: '#000000' },
+];
+---
+
+<BaseLayout
+  title="CoffeeFy: кофейня на Фонтанке, 126"
+  description="CoffeeFy: кофейня в Санкт-Петербурге на набережной реки Фонтанки, 126. Ежедневно с 9 до 22."
+>
+  <main class="container sample">
+    <p class="label">Образец токенов</p>
+    <h2>CoffeeFy</h2>
+    <p class="body">Ежедневно с 9:00 до 22:00. Фонтанки, 126.</p>
+    <ul class="swatches">
+      {
+        swatches.map((s) => (
+          <li>
+            <span class="chip" style={`background:${s.value}`} />
+            <span class="label">{s.name}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </main>
+</BaseLayout>
+
+<style>
+  .sample {
+    padding-block: var(--section-gap);
+    display: grid;
+    gap: var(--space-6);
+  }
+  .swatches {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .swatches li {
+    display: grid;
+    gap: var(--space-2);
+  }
+  .chip {
+    width: 8rem;
+    height: 4rem;
+    border: var(--border);
+  }
+</style>

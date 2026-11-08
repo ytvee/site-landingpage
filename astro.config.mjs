@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
 
 // unicode-range подмножеств из CSS Fontsource (cyrillic и latin).
 const UNICODE_RANGES = {
@@ -29,8 +30,10 @@ function fontsourceVariants(pkg, base, weights) {
 // До подключения домена на GitHub Pages: SITE_URL=https://ytvee.github.io SITE_BASE=/site-landingpage
 // С собственным доменом: SITE_URL=https://<домен>, SITE_BASE не задаём.
 export default defineConfig({
-  site: process.env.SITE_URL ?? 'http://localhost:4321',
-  base: process.env.SITE_BASE ?? '/',
+  site: process.env.SITE_URL || 'http://localhost:4321',
+  base: process.env.SITE_BASE || '/',
+  // Карта сайта только в боевом режиме индексации (S-016, S-018).
+  integrations: process.env.PUBLIC_ALLOW_INDEXING === 'true' ? [sitemap()] : [],
   trailingSlash: 'ignore',
   build: {
     inlineStylesheets: 'auto',

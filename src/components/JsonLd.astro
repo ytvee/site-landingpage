@@ -1,0 +1,33 @@
+---
+import { site, routes } from '../data/site';
+
+interface Props { url: string; image: string; description: string }
+const { url, image, description } = Astro.props;
+
+const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const sameAs = [site.vk, site.telegramChannel].filter(Boolean);
+
+// Данные из одного источника (src/data/site.ts). Выдуманных полей нет: geo, postalCode, рейтинги добавим после подтверждения карточек.
+const data = {
+  '@context': 'https://schema.org',
+  '@type': 'CafeOrCoffeeShop',
+  name: site.name,
+  url,
+  image,
+  description,
+  telephone: site.phone,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'набережная реки Фонтанки, 126',
+    addressLocality: 'Санкт-Петербург',
+    addressCountry: 'RU',
+  },
+  openingHoursSpecification: [
+    { '@type': 'OpeningHoursSpecification', dayOfWeek: days, opens: '09:00', closes: '22:00' },
+  ],
+  hasMap: routes[0].href,
+  amenityFeature: [{ '@type': 'LocationFeatureSpecification', name: 'Wi-Fi', value: true }],
+  sameAs,
+};
+---
+<script type="application/ld+json" set:html={JSON.stringify(data)} />

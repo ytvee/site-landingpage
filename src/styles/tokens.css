@@ -15,9 +15,9 @@
   --color-topbar: #000000;
   --color-accent: #000000; /* provisional: акцент определим по логотипу */
 
-  /* Шрифты (подключение файлов: этап B, задача S-005) */
-  --font-serif: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Nunito Sans', Avenir, 'Avenir Next', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Шрифты: файлы и запасные шрифты задаёт Astro Fonts API (astro.config.mjs, S-005) */
+  --font-serif: var(--font-source-serif);
+  --font-sans: var(--font-nunito);
 
   /* Типографика (значения Ceremony: h2 44/55, текст 13–16, подписи 11 uppercase) */
   --fs-label: 0.6875rem; /* 11px */

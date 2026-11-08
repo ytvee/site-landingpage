@@ -91,3 +91,7 @@ a {
 [id] { scroll-margin-top: calc(var(--header-h) + var(--space-4)); }
 
 @media (max-width: 899px) { :root { --header-h: 56px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}

@@ -9,7 +9,7 @@ const ext = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 ---
 <a class={`btn btn--${variant}`} href={href} {...ext}><slot /></a>
 <style>
-  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: var(--btn-pad-y) var(--btn-pad-x); border: var(--border); border-radius: var(--radius); font-family: var(--font-sans); font-size: var(--fs-label); letter-spacing: var(--ls-label); text-transform: uppercase; text-decoration: none; transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: var(--btn-pad-y) var(--btn-pad-x); border: var(--border); border-radius: var(--radius); font-family: var(--font-sans); font-size: var(--fs-label); letter-spacing: var(--ls-label); text-transform: uppercase; text-decoration: none; transition: background-color var(--dur-hover) var(--ease-soft), color var(--dur-hover) var(--ease-soft), border-color var(--dur-hover) var(--ease-soft); }
   .btn--outline { background: transparent; color: var(--color-text); }
   .btn--outline:hover { background: var(--color-text); color: var(--color-on-dark); }
   .btn--solid { background: var(--color-text); color: var(--color-on-dark); }

@@ -14,15 +14,38 @@ concurrency:
   group: pages
   cancel-in-progress: false
 
+# Переменные репозитория (Settings → Secrets and variables → Actions → Variables), необязательные:
+#   SITE_URL, SITE_BASE   адрес сайта (по умолчанию github.io; для домена: SITE_URL=https://домен, SITE_BASE=/)
+#   PUBLIC_ALLOW_INDEXING  true включает индексацию (только вместе с собственным доменом)
+#   PUBLIC_YM_ID           номер счётчика Яндекс Метрики
+env:
+  SITE_URL: ${{ vars.SITE_URL || 'https://ytvee.github.io' }}
+  SITE_BASE: ${{ vars.SITE_BASE || '/site-landingpage' }}
+  PUBLIC_ALLOW_INDEXING: ${{ vars.PUBLIC_ALLOW_INDEXING }}
+  PUBLIC_YM_ID: ${{ vars.PUBLIC_YM_ID }}
+
 jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm run validate
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: SITE_BASE=/ pnpm build && pnpm test
+
   build:
+    needs: check
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
       - uses: withastro/action@v6
-        env:
-          SITE_URL: https://ytvee.github.io
-          SITE_BASE: /site-landingpage
 
   deploy:
     needs: build

@@ -25,3 +25,6 @@ Thumbs.db
 playwright-report/
 test-results/
 .lighthouseci/
+
+test-results/
+playwright-report/

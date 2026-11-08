@@ -10,7 +10,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
     env:
       SITE_URL: https://ytvee.github.io
@@ -24,3 +24,7 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+      - run: pnpm run validate
+      - run: pnpm exec playwright install --with-deps chromium
+      # Тесты идут против сборки без префикса base (preview отдаёт её с корня).
+      - run: SITE_BASE=/ pnpm build && pnpm test

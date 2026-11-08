@@ -12,7 +12,8 @@
   "dependencies": {
     "@fontsource/nunito-sans": "^5.3.0",
     "@fontsource/source-serif-4": "^5.3.1",
-    "astro": "^7.4.7"
+    "astro": "^7.4.7",
+    "embla-carousel": "^8.6.0"
   },
   "devDependencies": {
     "simple-icons": "^16.37.0",

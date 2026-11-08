@@ -9,11 +9,12 @@ interface Props {
   href?: string;
   image?: ImageMetadata;
   alt?: string;
+  eager?: boolean;
 }
-const { title, label, text, href, image, alt = '' } = Astro.props;
+const { title, label, text, href, image, alt = '', eager = false } = Astro.props;
 ---
 <article class="card">
-  {image && <Image class="card__img" src={image} alt={alt} widths={[400, 800]} sizes="(min-width: 900px) 33vw, 100vw" format="webp" loading="lazy" />}
+  {image && <Image class="card__img" src={image} alt={alt} widths={[400, 800]} sizes="(min-width: 900px) 33vw, 100vw" format="webp" loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : 'auto'} />}
   {label && <p class="label">{label}</p>}
   <h3 class="card__title">{href ? <a href={href}>{title}</a> : title}</h3>
   {text && <p class="card__text">{text}</p>}

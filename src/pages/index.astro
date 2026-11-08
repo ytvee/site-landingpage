@@ -1,29 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Button from '../components/Button.astro';
-import Card from '../components/Card.astro';
-import Section from '../components/Section.astro';
-
-// Временная страница-образец токенов (этап A). Заменится реальным лендингом на этапе B.
-const swatches = [
-  { name: '--color-bg', value: '#fcfbf9' },
-  { name: '--color-bg-alt', value: '#f5f1eb' },
-  { name: '--color-surface-header', value: '#f3f1ee' },
-  { name: '--color-text', value: '#000000' },
-];
+import Hero from '../components/Hero.astro';
 ---
 
 <BaseLayout
   title="CoffeeFy: кофейня на Фонтанке, 126"
   description="CoffeeFy: кофейня в Санкт-Петербурге на набережной реки Фонтанки, 126. Ежедневно с 9 до 22."
 >
-  <Section id="sample" label="Образец компонентов" title="Кнопки и карточки">
-    <p style="display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:2rem">
-      <Button href="#location">Как добраться</Button>
-      <Button href="tel:+79992223333" variant="solid">Позвонить</Button>
-      <Button href="https://t.me/+79992223333" external>Telegram</Button>
-    </p>
-    <div style="background:#000;padding:2rem;margin-bottom:2rem"><Button href="#booking" variant="on-dark">Забронировать</Button></div>
-    <Card label="Пространство" title="Для работы" text="Wi-Fi, розетки и тихие зоны." href="#work" />
-  </Section>
+  <Hero />
 </BaseLayout>

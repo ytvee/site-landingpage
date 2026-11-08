@@ -1,0 +1,63 @@
+---
+import { slides } from '../data/slides';
+import { site } from '../data/site';
+import Button from './Button.astro';
+import Card from './Card.astro';
+---
+<section class="hero" aria-label="О кофейне">
+  <div class="container">
+    <div class="hero__intro">
+      <h1>{site.name}: кофейня на Фонтанке</h1>
+      <p class="hero__facts">{site.hours} · {site.address} · Wi-Fi, розетки, тихие зоны</p>
+      <p class="hero__actions">
+        <Button href="#location" variant="solid">Как добраться</Button>
+        <Button href={`tel:${site.phone}`}>Позвонить</Button>
+      </p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="slider" data-slider aria-roledescription="carousel" aria-label="Пространство CoffeeFy">
+      <div class="slider__viewport" data-viewport tabindex="0">
+        <ul class="slider__track">
+          {slides.map((s, i) => (
+            <li class="slider__slide" role="group" aria-roledescription="slide" aria-label={`${i + 1} из ${slides.length}`}>
+              <Card label={s.label} title={s.title} text={s.text} href={s.href} image={s.image} alt={s.alt} eager={i === 0} />
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="slider__controls" data-controls>
+        <p class="slider__count" aria-live="polite"><span data-current>1</span> / <span data-total>{slides.length}</span></p>
+        <button type="button" class="slider__btn" data-prev aria-label="Предыдущий слайд">←</button>
+        <button type="button" class="slider__btn" data-next aria-label="Следующий слайд">→</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero { padding-block: var(--space-16) var(--section-gap); }
+  .hero__intro { display: flex; flex-direction: column; gap: var(--space-6); margin-bottom: var(--space-16); max-width: 40rem; }
+  h1 { font-family: var(--font-serif); font-weight: 400; font-size: var(--fs-h2); line-height: var(--lh-h2); letter-spacing: var(--ls-h2); }
+  .hero__facts { font-size: var(--fs-body-sm); color: var(--color-text-muted); }
+  .hero__actions { display: flex; gap: var(--space-4); flex-wrap: wrap; }
+  .slider__viewport { overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .slider__viewport::-webkit-scrollbar { display: none; }
+  .slider__track { display: flex; gap: var(--space-6); list-style: none; margin: 0; padding: 0; }
+  .slider__slide { flex: 0 0 78%; min-width: 0; scroll-snap-align: start; }
+  @media (min-width: 600px) { .slider__slide { flex-basis: 38%; } }
+  @media (min-width: 1000px) { .slider__slide { flex-basis: 29%; } }
+  .slider__controls { display: none; align-items: center; justify-content: flex-end; gap: var(--space-2); margin-top: var(--space-8); }
+  :global(html.js) .slider__controls { display: flex; }
+  :global(html.js) .slider__viewport { overflow: hidden; scroll-snap-type: none; }
+  .slider__count { margin-right: var(--space-4); font-size: var(--fs-label); letter-spacing: var(--ls-label); }
+  .slider__btn { width: 44px; height: 44px; background: transparent; border: var(--border); border-radius: var(--radius); font-size: 1.125rem; cursor: pointer; color: var(--color-text); transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease); }
+  .slider__btn:hover:not(:disabled) { background: var(--color-text); color: var(--color-on-dark); }
+  .slider__btn:disabled { opacity: 0.3; cursor: default; }
+  @media (hover: hover) { :global(html.js) .slider__viewport { cursor: grab; } :global(html.js) .slider__viewport.is-dragging { cursor: grabbing; } }
+</style>
+
+<script>
+  import { initSlider } from '../scripts/slider';
+  initSlider();
+</script>

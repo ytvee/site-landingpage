@@ -1,0 +1,17 @@
+---
+import { socials } from '../data/site';
+---
+<ul class="social">
+  {socials.filter((s) => s.enabled).map((s) => (
+    <li>
+      <a href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label}>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true"><path d={s.path} /></svg>
+      </a>
+    </li>
+  ))}
+</ul>
+<style>
+  .social { display: flex; gap: var(--space-1); list-style: none; margin: 0; padding: 0; }
+  .social a { display: grid; place-items: center; width: 44px; height: 44px; }
+  .social a:hover { opacity: 0.6; }
+</style>

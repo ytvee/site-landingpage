@@ -1,0 +1,16 @@
+---
+import { site } from '../data/site';
+---
+<div class="topbar">
+  <div class="container topbar__in">
+    <p>{site.hours} · {site.address}</p>
+    <a href="#location">Как добраться</a>
+  </div>
+</div>
+<style>
+  .topbar { background: var(--color-topbar); color: var(--color-on-dark); height: var(--topbar-h); font-size: var(--fs-label); letter-spacing: var(--ls-label); text-transform: uppercase; }
+  .topbar__in { display: flex; justify-content: space-between; align-items: center; height: 100%; gap: var(--space-4); }
+  .topbar a { text-decoration: none; }
+  .topbar a:hover { text-decoration: underline; }
+  @media (max-width: 560px) { .topbar a { display: none; } .topbar__in { justify-content: center; } }
+</style>

@@ -1,0 +1,76 @@
+---
+import { nav } from '../data/site';
+import Logo from './Logo.astro';
+import SocialLinks from './SocialLinks.astro';
+---
+<header class="header" data-header>
+  <div class="container header__in">
+    <Logo />
+    <button type="button" class="burger" aria-expanded="false" aria-controls="site-nav" data-burger>
+      <span class="visually-hidden">Меню</span>
+      <span class="burger__bars" aria-hidden="true"></span>
+    </button>
+    <div class="panel" id="site-nav" data-panel>
+      <nav aria-label="Основная навигация">
+        <ul class="nav">
+          {nav.map((item) =>
+            item.type === 'link' ? (
+              <li><a class="nav__link" href={item.href}>{item.label}</a></li>
+            ) : (
+              <li class="group" data-group>
+                <button type="button" class="nav__link nav__btn" aria-expanded="false" aria-controls={`dd-${item.id}`}>
+                  {item.label}<span class="caret" aria-hidden="true"></span>
+                </button>
+                <ul class="dd" id={`dd-${item.id}`}>
+                  {item.items.map((l) => (
+                    <li><a href={l.href} {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}>{l.label}</a></li>
+                  ))}
+                </ul>
+              </li>
+            )
+          )}
+        </ul>
+      </nav>
+      <SocialLinks />
+    </div>
+  </div>
+</header>
+
+<style>
+  .header { position: sticky; top: 0; z-index: 50; background: var(--color-surface-header); height: var(--header-h); }
+  .header__in { display: flex; align-items: center; justify-content: space-between; height: 100%; gap: var(--space-6); }
+  .panel { display: flex; align-items: center; gap: var(--space-8); }
+  .nav { display: flex; gap: var(--space-6); list-style: none; margin: 0; padding: 0; align-items: center; }
+  .nav__link { font-family: var(--font-sans); font-size: var(--fs-body-sm); text-decoration: none; background: none; border: 0; color: inherit; cursor: pointer; padding: var(--space-3) 0; display: inline-flex; align-items: center; gap: var(--space-2); }
+  .nav__link:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .caret { width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: rotate(45deg) translateY(-2px); transition: transform var(--dur) var(--ease); }
+  [aria-expanded='true'] > .caret { transform: rotate(-135deg) translate(-1px, -1px); }
+  .group { position: relative; }
+  .dd { list-style: none; margin: 0; padding: var(--space-2) 0; min-width: 12rem; background: var(--color-bg); border: var(--border); position: absolute; top: 100%; left: 0; display: none; }
+  :global(html:not(.js)) .group:hover .dd, :global(html:not(.js)) .group:focus-within .dd { display: block; }
+  .group:has(> [aria-expanded='true']) .dd { display: block; }
+  .dd a { display: block; padding: var(--space-3) var(--space-4); font-size: var(--fs-body-sm); text-decoration: none; }
+  .dd a:hover { background: var(--color-bg-alt); }
+  .burger { display: none; }
+
+  @media (max-width: 899px) {
+    .burger { display: grid; place-items: center; width: 44px; height: 44px; background: none; border: 0; cursor: pointer; color: inherit; }
+    .burger__bars, .burger__bars::before { content: ''; display: block; width: 22px; height: 1.5px; background: currentColor; position: relative; }
+    .burger__bars::before { position: absolute; top: -7px; }
+    .burger__bars { box-shadow: 0 7px 0 currentColor; }
+    .panel { position: absolute; top: var(--header-h); left: 0; right: 0; background: var(--color-surface-header); flex-direction: column; align-items: flex-start; padding: var(--space-4) var(--gutter) var(--space-6); border-top: var(--border); max-height: calc(100dvh - var(--header-h)); overflow-y: auto; }
+    :global(html.js) .panel { display: none; }
+    :global(html.js) .panel.is-open { display: flex; }
+    .panel nav { width: 100%; }
+    .nav { flex-direction: column; align-items: flex-start; gap: 0; width: 100%; }
+    .nav li { width: 100%; }
+    .nav__link { width: 100%; padding: var(--space-3) 0; font-size: var(--fs-body); justify-content: space-between; }
+    .dd { position: static; border: 0; background: none; padding: 0 0 var(--space-2) var(--space-4); }
+    :global(html:not(.js)) .group:hover .dd { display: block; }
+  }
+</style>
+
+<script>
+  import { initHeader } from '../scripts/header';
+  initHeader();
+</script>

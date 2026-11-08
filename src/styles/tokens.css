@@ -49,6 +49,10 @@
   --btn-pad-y: 0.875rem;
   --btn-pad-x: 1rem;
 
+  /* Шапка */
+  --topbar-h: 36px;
+  --header-h: 64px;
+
   /* Движение */
   --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
   --dur: 200ms;
